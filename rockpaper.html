@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Rock Paper Scissors</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .choices {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .choice {
+            font-size: 2rem;
+            padding: 1rem;
+            border: none;
+            background-color: #f0f0f0;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .choice:hover {
+            transform: scale(1.1);
+        }
+        #result, #score, #series {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+        }
+        #result {
+            font-weight: bold;
+        }
+        .selection {
+            font-size: 3rem;
+            margin: 1rem 0;
+        }
+        #resetBtn {
+            margin-top: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+        .shake {
+            animation: shake 0.5s;
+            animation-iteration-count: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Rock Paper Scissors</h1>
+        <div class="choices">
+            <button class="choice" onclick="play('rock')"><i class="fas fa-hand-rock"></i></button>
+            <button class="choice" onclick="play('paper')"><i class="fas fa-hand-paper"></i></button>
+            <button class="choice" onclick="play('scissors')"><i class="fas fa-hand-scissors"></i></button>
+        </div>
+        <div class="selection">
+            <span id="playerSelection"></span>
+            <span id="computerSelection"></span>
+        </div>
+        <div id="result"></div>
+        <div id="score">Player: 0 - Computer: 0</div>
+        <div id="series">First to win 3 rounds wins the series!</div>
+        <button id="resetBtn" onclick="resetGame()">Reset Game</button>
+    </div>
+
+    <script>
+        let playerScore = 0;
+        let computerScore = 0;
+        let roundsPlayed = 0;
+
+        const choices = {
+            'rock': '<i class="fas fa-hand-rock"></i>',
+            'paper': '<i class="fas fa-hand-paper"></i>',
+            'scissors': '<i class="fas fa-hand-scissors"></i>'
+        };
+
+        function computerPlay() {
+            const choices = ['rock', 'paper', 'scissors'];
+            return choices[Math.floor(Math.random() * choices.length)];
+        }
+
+        function play(playerSelection) {
+            if (playerScore === 3 || computerScore === 3) return;
+
+            const computerSelection = computerPlay();
+            roundsPlayed++;
+
+            document.getElementById('playerSelection').innerHTML = choices[playerSelection];
+            document.getElementById('computerSelection').innerHTML = choices[computerSelection];
+
+            document.getElementById('playerSelection').classList.add('shake');
+            document.getElementById('computerSelection').classList.add('shake');
+
+            setTimeout(() => {
+                document.getElementById('playerSelection').classList.remove('shake');
+                document.getElementById('computerSelection').classList.remove('shake');
+                
+                const result = playRound(playerSelection, computerSelection);
+                document.getElementById('result').textContent = result;
+                updateScore();
+                checkSeriesWinner();
+            }, 500);
+        }
+
+        function playRound(playerSelection, computerSelection) {
+            if (playerSelection === computerSelection) {
+                return `It's a tie! Both chose ${playerSelection}.`;
+            }
+
+            if (
+                (playerSelection === 'rock' && computerSelection === 'scissors') ||
+                (playerSelection === 'paper' && computerSelection === 'rock') ||
+                (playerSelection === 'scissors' && computerSelection === 'paper')
+            ) {
+                playerScore++;
+                return `You win! ${playerSelection} beats ${computerSelection}.`;
+            } else {
+                computerScore++;
+                return `You lose! ${computerSelection} beats ${playerSelection}.`;
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = `Player: ${playerScore} - Computer: ${computerScore}`;
+        }
+
+        function checkSeriesWinner() {
+            if (playerScore === 3 || computerScore === 3) {
+                const winner = playerScore === 3 ? 'Player' : 'Computer';
+                document.getElementById('series').textContent = `${winner} wins the series!`;
+            } else {
+                document.getElementById('series').textContent = `Round ${roundsPlayed} - First to win 3 rounds wins the series!`;
+            }
+        }
+
+        function resetGame() {
+            playerScore = 0;
+            computerScore = 0;
+            roundsPlayed = 0;
+            updateScore();
+            document.getElementById('result').textContent = '';
+            document.getElementById('playerSelection').innerHTML = '';
+            document.getElementById('computerSelection').innerHTML = '';
+            document.getElementById('series').textContent = 'First to win 3 rounds wins the series!';
+        }
+    </script>
+</body>
+</html>

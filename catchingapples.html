@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catch the Apples</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #87CEEB;
+        }
+        #gameCanvas {
+            border: 2px solid black;
+            background-color: #90EE90;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="gameCanvas" width="400" height="400"></canvas>
+    <div>
+    <a href="mainhome.html" class="back-link">Back to Game Hub</a>
+</div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        const basket = {
+            x: canvas.width / 2 - 30,
+            y: canvas.height - 50,
+            width: 60,
+            height: 20
+        };
+
+        let apples = [];
+        let score = 0;
+
+        function drawBasket() {
+            ctx.fillStyle = 'brown';
+            ctx.fillRect(basket.x, basket.y, basket.width, basket.height);
+        }
+
+        function drawApple(apple) {
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(apple.x, apple.y, 10, 0, Math.PI * 2);
+            ctx.fill();
+        }
+
+        function createApple() {
+            return {
+                x: Math.random() * (canvas.width - 20) + 10,
+                y: 0,
+                speed: Math.random() * 2 + 1
+            };
+        }
+
+        function updateGame() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawBasket();
+            
+            if (Math.random() < 0.02) {
+                apples.push(createApple());
+            }
+            
+            apples.forEach((apple, index) => {
+                apple.y += apple.speed;
+                drawApple(apple);
+                
+                if (apple.y > canvas.height) {
+                    apples.splice(index, 1);
+                }
+                
+                if (apple.y + 10 > basket.y && 
+                    apple.x > basket.x && 
+                    apple.x < basket.x + basket.width) {
+                    apples.splice(index, 1);
+                    score++;
+                }
+            });
+            
+            ctx.fillStyle = 'black';
+            ctx.font = '20px Arial';
+            ctx.fillText('Score: ' + score, 10, 30);
+            
+            requestAnimationFrame(updateGame);
+        }
+
+        canvas.addEventListener('mousemove', (event) => {
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            basket.x = mouseX - basket.width / 2;
+            
+            if (basket.x < 0) basket.x = 0;
+            if (basket.x + basket.width > canvas.width) basket.x = canvas.width - basket.width;
+        });
+
+        updateGame();
+    </script>
+</body>
+</html>

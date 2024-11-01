@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+      }
+      .container {
+        width: 400px;
+        margin: 100px auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        background: transparent;
+      }
+      h1 {
+        text-align: center;
+      }
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        margin-top: 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: #005cbf;
+      }
+      .error {
+        color: #ff0000;
+        margin-top: 10px;
+      }
+      .button {
+           background-color: #1c87c9;
+           border: none;
+           color: white;
+           padding: 1px 181px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 20px;
+           cursor: pointer;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Login In</h1>
+      <form id="login-form" method="post" action="login.php">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required />
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required />
+        <label for="age">Age:</label>
+        <input type="number" id="Age" name="Age" required  />
+        <a href="home.html" class="button" onclick="onAlert()">Login</a>
+        <a href="#">you not have acount?</a>
+        <a href="register.html">Register</a>
+       
+    
+        <div id="error-message" class="error"></div>
+      </div>
+    <script>
+      // This is a sample script to validate the login form and display an error message if the credentials are incorrect
+      // You can modify this script according to your needs
+      var loginForm = document.getElementById("login-form");
+      var loginButton = document.getElementById("login-button");
+      var errorMessage = document.getElementById("error-message");
+      loginButton.addEventListener("click", function (event) {
+        // Prevent the default form submission
+        event.preventDefault();
+        // Get the username and password values from the input fields
+        var username = loginForm.username.value;
+        var password = loginForm.password.value;
+        // Check if the username and password are correct
+        // For simplicity, we assume that the correct username is "admin" and the correct password is "1234"
+        // You can replace this logic with your own authentication logic
+        if (username == "admin" && password == "1234") {
+          // If the credentials are correct, redirect the user to the home page
+          window.location.href = "main.html";
+        } else {
+          // If the credentials are incorrect, display an error message
+          errorMessage.textContent = "Invalid username or password";
+        }
+      });
+      //for show the you have login in a accont (alert)
+      function onAlert(){
+        alert("You Created A Account");
+      }
+
+    </script>
+  </body>
+</html>

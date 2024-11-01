@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piano Tiles Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        #game-container {
+            text-align: center;
+        }
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+            margin-bottom: 20px;
+        }
+        .tile {
+            width: 80px;
+            height: 120px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+        }
+        .black {
+            background-color: #000;
+        }
+        .white {
+            background-color: #fff;
+        }
+        #start-button {
+            font-size: 18px;
+            padding: 10px 20px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Piano Tiles Game</h1>
+        <div id="score">Score: <span id="score-value">0</span></div>
+        <div id="game-board"></div>
+        <button id="start-button">Start Game</button><br>
+        <a href="mainhome.html" class="back-link">Back to Game Hub</a>
+    </div>
+
+    <script>
+        const gameBoard = document.getElementById('game-board');
+        const startButton = document.getElementById('start-button');
+        const scoreValue = document.getElementById('score-value');
+        let score = 0;
+        let gameActive = false;
+        let intervalId;
+
+        function createTile(isBlack) {
+            const tile = document.createElement('div');
+            tile.className = `tile ${isBlack ? 'black' : 'white'}`;
+            tile.addEventListener('click', () => handleTileClick(tile));
+            return tile;
+        }
+
+        function createRow() {
+            const blackIndex = Math.floor(Math.random() * 4);
+            for (let i = 0; i < 4; i++) {
+                gameBoard.appendChild(createTile(i === blackIndex));
+            }
+        }
+
+        function handleTileClick(tile) {
+            if (!gameActive) return;
+            if (tile.classList.contains('black')) {
+                score++;
+                scoreValue.textContent = score;
+                tile.remove();
+            } else {
+                endGame();
+            }
+        }
+
+        function moveRows() {
+            const tiles = gameBoard.querySelectorAll('.tile');
+            tiles.forEach((tile, index) => {
+                if (index >= tiles.length - 4) {
+                    tile.remove();
+                }
+            });
+            createRow();
+        }
+
+        function startGame() {
+            gameBoard.innerHTML = '';
+            score = 0;
+            scoreValue.textContent = score;
+            gameActive = true;
+            startButton.textContent = 'End Game';
+            for (let i = 0; i < 4; i++) {
+                createRow();
+            }
+            intervalId = setInterval(moveRows, 2000);
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(intervalId);
+            startButton.textContent = 'Start Game';
+            alert(`Game Over! Your score: ${score}`);
+        }
+
+        startButton.addEventListener('click', () => {
+            if (gameActive) {
+                endGame();
+            } else {
+                startGame();
+            }
+        });
+    </script>
+</body>
+</html>

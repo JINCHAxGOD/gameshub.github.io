@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        nav {
+            background-color: #444;
+            padding: 0.5em;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 1em;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            max-width: 800px;
+            margin: 2em auto;
+            padding: 1em;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1em;
+            margin-top: 2em;
+        }
+        .game-card {
+            border: 1px solid #ddd;
+            padding: 1em;
+            text-align: center;
+        }
+        .game-card img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Game Hub</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="startinghome.html">Home</a></li>
+            <li><a href="mainhome.html">More Games</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Featured Games</h2>
+        <div class="game-grid">
+            <div class="game-card">
+                <a href="golf.html">
+                <img src="golf.png" alt="Game 1">
+            </a>
+                <h3>Golf</h3>
+                <p>fall in to the Hole</p>
+            </div>
+            <div class="game-card">
+                <a href="harmer.html">
+                <img src="harmer.jpeg" alt="Game 2">
+            </a>
+                <h3>Hamer man</h3>
+                <p>Getting Over It</p>
+            </div>
+            <div class="game-card">
+                <a href="minecraft.html">
+                <img src="paperminecraft.jpeg" alt="Game 3">
+            </a>
+                <h3>Paper Minecraft</h3>
+                <p>2d Minecraft</p>
+            </div>
+            <div class="game-card">
+                <a href="fruitninjascratch.html">
+                <img src="fruitninjahe.jpeg" alt="Game 4">
+            </a>
+                <h3>Fruit Ninja</h3>
+                <p>Cuting Fruit</p>
+            </div>
+            <div class="game-card">
+                <a href="geomentrydash.html">
+                <img src="Geometrydash.jpeg" alt="Game 4">
+            </a>
+                <h3>Gemotry Dash</h3>
+                <p>Flying Gemotry Dash x Gemotry Dash</p>
+            </div>
+            <div class="game-card">
+                <a href="flappybird2scratch.html">
+                <img src="flappybird2.jpeg" alt="Game 4">
+            </a>
+                <h3>Flappy Bird 2</h3>
+                <p>flying bird game</p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

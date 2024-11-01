@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+       <title>Register</title>
+       <link rel="stylesheet" href="register.css" />
+       <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f0f0;
+        }
+        .form-container {
+          width: 200px;
+          margin: 20px auto;
+          padding: 170px;
+          border: 1px solid #ccc;
+          background: transparent;
+        }
+        h1 {
+          text-align: center;
+        }
+        label {
+          display: block;
+          margin-bottom: 10px;
+        }
+        input {
+          width: 100%; 
+          padding: 5px;
+          border: 1px solid #ffffff;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+          margin-top: 20px;
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          cursor: pointer;
+        }
+        button:hover {
+          background-color: #005cbf;
+        }
+        .error {
+          color: #ff0000;
+          margin-top: 10px;
+        }
+        .button {
+           background-color: #1c87c9;
+           border: none;
+           color: white;
+           padding: 1px 80px;
+           text-align: center;
+           text-decoration: none;
+           display: inline-block;
+           font-size: 20px;
+           cursor: pointer;
+        }
+      </style>
+    </head>
+    <body>
+      <div class="form-container">
+        <h1>Register</h1>
+        <h6>------------------------------------------------------</h6>
+        <form id="login-form" method="post" action="login.php">
+          <label for="frist username">First Username:</label>
+          <input type="text" id="frist username" name="first username" required />
+          <label for="last username">Last Username:</label>
+          <input type="text" id="username" name="username" required />
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" required />
+          <label for="password">Confirm Password:</label>
+          <input type="password" id="password" name="password" required />
+          <a href="home.html" class="button">Sign</a>
+          <a href="#">do you have an acount?</a>
+          <a href="login.html">Login</a>
+          </form>
+          </div>
+
+    </body> 
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #word-display {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        #guesses {
+            margin-bottom: 20px;
+        }
+        #hangman {
+            font-family: monospace;
+            white-space: pre;
+            margin-bottom: 20px;
+        }
+        input {
+            width: 30px;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        button {
+            font-size: 18px;
+            cursor: pointer;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Hangman</h1>
+        <div id="word-display"></div>
+        <div id="guesses">Guesses: </div>
+        <div id="hangman"></div>
+        <input type="text" id="guess-input" maxlength="1">
+        <button id="guess-button">Guess</button>
+        <p id="message"></p>
+        <a href="mainhome.html" class="back-link">Back to Game Hub</a>
+    </div>
+    <script>
+        const words = ['javascript', 'html', 'css', 'python', 'react', 'nodejs'];
+        let word = '';
+        let guessedLetters = [];
+        let remainingGuesses = 6;
+
+        const wordDisplay = document.getElementById('word-display');
+        const guessesDisplay = document.getElementById('guesses');
+        const hangmanDisplay = document.getElementById('hangman');
+        const guessInput = document.getElementById('guess-input');
+        const guessButton = document.getElementById('guess-button');
+        const messageDisplay = document.getElementById('message');
+
+        const hangmanStages = [
+            '',
+            '  O  ',
+            '  O  \n  |  ',
+            '  O  \n /|  ',
+            '  O  \n /|\\ ',
+            '  O  \n /|\\ \n /   ',
+            '  O  \n /|\\ \n / \\ '
+        ];
+
+        function chooseWord() {
+            return words[Math.floor(Math.random() * words.length)];
+        }
+
+        function displayWord() {
+            return word.split('').map(letter => guessedLetters.includes(letter) ? letter : '_').join(' ');
+        }
+
+        function updateDisplay() {
+            wordDisplay.textContent = displayWord();
+            guessesDisplay.textContent = 'Guesses: ' + guessedLetters.join(', ');
+            hangmanDisplay.textContent = hangmanStages[6 - remainingGuesses];
+        }
+
+        function startGame() {
+            word = chooseWord();
+            guessedLetters = [];
+            remainingGuesses = 6;
+            updateDisplay();
+            messageDisplay.textContent = '';
+            guessInput.value = '';
+            guessInput.disabled = false;
+            guessButton.disabled = false;
+        }
+
+        function makeGuess() {
+            const guess = guessInput.value.toLowerCase();
+            guessInput.value = '';
+
+            if (guess.length !== 1 || !/[a-z]/.test(guess)) {
+                messageDisplay.textContent = 'Please enter a single letter.';
+                return;
+            }
+
+            if (guessedLetters.includes(guess)) {
+                messageDisplay.textContent = 'You already guessed that letter.';
+                return;
+            }
+
+            guessedLetters.push(guess);
+
+            if (!word.includes(guess)) {
+                remainingGuesses--;
+            }
+
+            updateDisplay();
+
+            if (displayWord() === word) {
+                messageDisplay.textContent = 'Congratulations! You won!';
+                endGame();
+            } else if (remainingGuesses === 0) {
+                messageDisplay.textContent = 'Game over. The word was: ' + word;
+                endGame();
+            } else {
+                messageDisplay.textContent = '';
+            }
+        }
+
+        function endGame() {
+            guessInput.disabled = true;
+            guessButton.disabled = true;
+        }
+
+        guessButton.addEventListener('click', makeGuess);
+        guessInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                makeGuess();
+            }
+        });
+
+        startGame();
+    </script>
+</body>
+</html>

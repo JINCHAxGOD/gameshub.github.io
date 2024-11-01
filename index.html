@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+        .header {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+        .search-container {
+            text-align: center;
+            margin: 1rem 0;
+        }
+        .search-container input {
+            padding: 0.5rem;
+            width: 300px;
+        }
+        .search-container button {
+            padding: 0.5rem 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .games-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1rem;
+        }
+        .game-card {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            width: 200px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.3s;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+        .game-card-content {
+            padding: 1rem;
+        }
+        .game-card h3 {
+            margin: 0 0 0.5rem 0;
+        }
+        .game-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Game Hub</h1>   
+    </div>
+   
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for games...">
+        <button onclick="searchCategories()">Search</button>
+        <div id="searchResults"></div>
+    </div>
+    <div class="games-container">
+        <a href="guessgame.html" class="game-card">
+            <img src="guessgame.jpg" alt="Guess the Number">
+            <div class="game-card-content">
+                <h3>Guess the Number</h3>
+                <p>Try to guess a random number between 1 and 100.</p>
+            </div>
+        </a>
+            <a href="ticgame.html" class="game-card">
+                <img src="tictoe.png" alt="Tic Tac Toe">
+                <div class="game-card-content">
+                    <h3>Tic Tac Toe</h3>
+                    <p>Classic two-player game on a 3x3</p>
+                </div>
+            </a>
+    
+        <a href="snake.html" class="game-card">
+            <img src="snake.jpg" alt="Snake">
+            <div class="game-card-content">
+                <h3>Snake</h3>
+                <p>Control a snake to eat food and grow longer.</p>
+            </div>
+        </a>
+        <a href="memorymatch.html" class="game-card">
+            <img src="memoriesmatch.png" alt="Memory Match">
+            <div class="game-card-content">
+                <h3>Memory Match</h3>
+                <p>Find matching pairs of cards in this memory game.</p>
+            </div>
+        </a>
+        <a href="tetris.html" class="game-card">
+            <img src="tetris.jpg" alt="Tetris">
+            <div class="game-card-content">
+                <h3>Tetris</h3>
+                <p>Arrange falling blocks to create complete lines.</p>
+            </div>
+        </a>
+        <a href="catchingapples.html" class="game-card">
+            <img src="apples.jpg" alt="Catching Apples">
+            <div class="game-card-content">
+                <h3>Catching Apples</h3>
+                <p>Catch in a ball apples</p>
+            </div>
+        </a>
+        <a href="pianotiles.html" class="game-card">
+            <img src="pianotiles.jpg" alt="Piano Tiles">
+            <div class="game-card-content">
+                <h3>Piano Tiles</h3>
+                <p>click in tiles </p>
+            </div>
+        </a>
+        <a href="spaceinveders.html" class="game-card">
+            <img src="spaceinveders.jpg" alt="Space Inveders">
+            <div class="game-card-content">
+                <h3>Space Inveders</h3>
+                <p>Space Shoot </p>
+            </div>
+        </a>
+        <a href="hangman.html" class="game-card">
+            <img src="unnamed.jpg" alt="Hang Man">
+            <div class="game-card-content">
+                <h3>Hang Man</h3>
+                <p>Guess the word</p>
+            </div>
+        </a>
+        <a href="spacecraft.html" class="game-card">
+            <img src="SPACECRAFT.jpg" alt="SpaceCraft">
+            <div class="game-card-content">
+                <h3>SpaceCraft</h3>
+                <p>Falling Asteroids</p>
+            </div>
+        </a>
+        <a href="maze.html" class="game-card">
+        <img src="MAZE.jpg" alt="Maze">
+        <div class="game-card-content">
+            <h3>Maze Game</h3>
+            <p>Maze</p>
+        </div>
+    </a>
+    <a href="flappybird.html" class="game-card">
+        <img src="unnamed (1).jpg" alt="Flappy Bird">
+        <div class="game-card-content">
+            <h3>Flappy Bird</h3>
+            <p>Flying Bird</p>
+        </div>
+    </a>
+    <a href="rockpaper.html" class="game-card">
+        <img src="rock.jpg" alt="Rocks And Paper">
+        <div class="game-card-content">
+            <h3>Rocks And Paper</h3>
+            <p>player vs computer </p>
+        </div>
+    </a>
+    <a href="mazecratch.html" class="game-card">
+        <img src="maze2.jpg" alt="Maze 2 Game">
+        <div class="game-card-content">
+            <h3>Maze 2 Game</h3>
+            <p>Long maze 2 </p>
+        </div>
+        <a href="fruitninjascratch.html" class="game-card">
+            <img src="fruitninjahe.jpeg" alt="Fruit Ninja">
+            <div class="game-card-content">
+                <h3>Fruit Ninja</h3>
+                <p>Fruit Cuting</p>
+            </div>
+            <a href="geomentrydash.html" class="game-card">
+                <img src="Geometrydash.jpeg" alt="Geometry Dash">
+                <div class="game-card-content">
+                    <h3>Geometry Dash</h3>
+                    <p>Flying Geometry Dash x Geometry Dash</p>
+                </div>
+                <a href="minecraft.html" class="game-card">
+                    <img src="paperminecraft.jpeg" alt="Minecraft">
+                    <div class="game-card-content">
+                        <h3>Paper Minecraft</h3>
+                        <p>2d Minecraft</p>
+                    </div>
+                    <a href="flappybird2scratch.html" class="game-card">
+                        <img src="flappybird2.jpeg" alt="Minecraft">
+                        <div class="game-card-content">
+                            <h3>Flappy Bird</h3>
+                            <p>Scratch Flappy Bird</p>
+                        </div><br>
+                        <a href="iqtest.html" class="game-card">
+                            <img src="iqtest.png" alt="Iqtest">
+                            <div class="game-card-content">
+                                <h3>IQ Test</h3>
+                                <p>Question Challange</p>
+                            </div>  
+                            <a href="crosscode.html" class="game-card">
+                                <img src="crosscode.jpeg" alt="Cross Code">
+                                <div class="game-card-content">
+                                    <h3>Cross Code</h3>
+                                    <p>Word Quiz</p>
+                                </div> 
+                                <a href="breakout.html" class="game-card">
+                                    <img src="Breakout.jpeg" alt="Break Out">
+                                    <div class="game-card-content">
+                                        <h3>Break Out</h3>
+                                        <p>Break Walls</p>
+                                    </div> 
+                                    <a href="packman.html" class="game-card">
+                                        <img src="packman.jpeg" alt="Pack Man">
+                                        <div class="game-card-content">
+                                            <h3>Pack Man</h3>
+                                            <p>Excape from the Maze</p>
+                                        </div>
+                                        <a href="golf.html" class="game-card">
+                                            <img src="golf.png" alt="Golf">
+                                            <div class="game-card-content">
+                                                <h3>Golf Game</h3>
+                                                <p>fall in to the Hole</p>
+                                            </div>
+                                                <a href="harmer.html" class="game-card">
+                                                    <img src="harmer.jpeg" alt="">
+                                                    <div class="game-card-content">
+                                                        <h3>Harmer Game</h3>
+                                                        <p>Gettng over it </p>
+                                            </div>    
+    </div>
+    <script>
+          const categories = [
+                {name: "Guess The Number", url: "guessgame.html"},
+                {name: "Tic Tac Toe", url: "ticgame.html"},
+                {name: "Snake", url: "snake.html"},
+                {name: "Memory Match", url: "memorimatch.html"},
+                {name: "Tetris", url: "tetris.html"},
+                {name: "Catching Apples", url: "catchingapples.html" },
+                {name: "Piano Tiles", url: "pianotiles.html" },
+                {name: "Space Inveders", url: "spaceinveders.html" },
+                {name: "Hang Man", url: "hangman.html" },
+                {name: "Space Craft", url: "spacecraft.html" },
+                {name: "Maze ", url: "maze.html" },
+                {name: "Flappy Bird", url: "flappybird.html" },
+                {name: "Rock And Paper", url: "rockpaper.html" },
+                {name: "Maze 2", url: "mazecratch.html" },
+                {name: "Fruit Ninja", url: "fruitninja.html" },
+                {name: "Geometry Dash", url: "geomentrydash.html" },
+                {name: "Paper Minecraft", url: "minecraft.html" },
+                {name: "Iq Test", url: "iqtest.html" },
+                {name: "Cross Code", url: "crosscode.html" },
+                {name: "Break Out", url: "breakout.html" },
+                {name: "Pack Man", url: "packman.html" },
+                {name: "Golf", url: "golf.html" },
+                {name: "Harmer", url: "harmer.html" }
+            ];
+    
+            function searchCategories() {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+                const resultsDiv = document.getElementById('searchResults');
+                resultsDiv.innerHTML = '';
+                const matchingCategories = categories.filter(category => 
+                    category.name.toLowerCase().includes(searchTerm)
+                );
+
+                console.log("matchingCategories", matchingCategories)
+    
+                matchingCategories.forEach(category => {
+                    const link = document.createElement('a');
+                    link.href = category.url;
+                    link.textContent = category.name;
+                    resultsDiv.appendChild(link);
+                    resultsDiv.appendChild(document.createElement('br'));
+                });
+            }
+    </script>
+</body>
+</html>
